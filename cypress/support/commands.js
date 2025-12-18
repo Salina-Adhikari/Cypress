@@ -26,6 +26,7 @@
 
 /// <reference types="Cypress" />
 /// <reference types="cypress-xpath" />
+import inst from '../e2e/pageObjects/instPage.js'
 import 'cypress-xpath';
 Cypress.Commands.add('createuser',(name,email,password,password_confirmation,status,verified_status) =>{
     
@@ -81,48 +82,71 @@ Cypress.Commands.add('assignrole',(roles,user_id,year_id,token) =>{
     })
 
 })
-// Cypress.Commands.add('create inst',(description,institution_type_id,name,state_id,state_status,distrcit_id,district_status,city_ids,status,year_id,token)=>{
-//     cy.request({
-//         method:'GET',
-//         url:'https://stcchildbudget.infodev.com.np/public-api/api/v1/public/locations/districts',
+Cypress.Commands.add('institution',(token)=>{
+    cy.request({
+        method:'GET',
+        url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/institutions/list?page=1&per_page=10&search=Est+sed+consequuntur&sort_by=name&sort_order=asc&year_id=1",
+        headers:{
+            'Authorization': `Bearer ${token}`, 
+            'Accept': 'application/json'
+
+        }
+    })
+    .then((response)=>{
+        const institutions=response.body.data
+        const index=2
+        const inst_id=institutions[index].id
+        cy.wrap(inst_id).as('type_id')
+        cy.log('Institution ID:', inst_id)
+    })
+})
+    
+//     cypress.request({
+//         method:'POST',
+//         url:'https://stcchildbudget.infodev.com.np/public-api/api/v1/institutions',
 //         headers:{
+//             'Content-Type':'application/json',
 //             'Authorization': `Bearer ${token}`, 
 //             'Accept': 'application/json'
-//         },
-//     }).then((response)=>{
-//         const districtname=response.body.data(item =>dataitem==Cypress.env('districtName'))
-//         if(!district){
-//             throw new error('this is not a district name')
-//         }
-//         cy.log('district id',districtname.id)
-//         const districtID=districtname.id
 
-//     })
-    
-//     cy.request({
-//         method:'POST',
-//         url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/institutions",
+//         },
 //         body:{
 //             description:description,
-//             institution_type_id:institution_type_id,
 //             name:name,
-//             region:{
-//                 state_id:state_id,
-//                 state_status:state_status,
-//                 distrcit_id:district_id,
-//                 district_status:district_status,
-//                 city_ids:city_ids
-//             },
 //             status:status,
-//             year_id:year_id
+//             year_id:year_id,
+//             institution_type_id:institution_type_id,
 
-//         },
-//         headers:{
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`, 
-//             'Accept': 'application/json'
-//         },
+//         }
 
 //     })
+
 // })
+Cypress.Commands.add('Popups',(token,name,file_path) =>{
+    cy.request({
+        method:'POST',
+        url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/popups",
+        headers:{
+            'Authorization': `Bearer ${token}`, 
+            'Accept': 'application/json'
+
+        },
+        body:{
+            name:name,
+            file
+
+        }
+
+
+    })
+        
+    
+})
+
+
+
+
+
+
+
 

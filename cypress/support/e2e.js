@@ -16,3 +16,17 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 require('cypress-xpath')
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Ignore ResizeObserver loop errors
+  if (err.message.includes('ResizeObserver loop')) {
+    return false
+  }
+  
+  // Ignore "Too many requests" errors if you want
+  if (err.message.includes('Too many requests')) {
+    return false
+  }
+  
+  // Let other real errors fail the test
+  return true
+})
