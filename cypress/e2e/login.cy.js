@@ -271,11 +271,59 @@ describe('Login process',() =>{
     cy.get(stra.policy_name).click().type(Cypress.env("Create_policy").name)
     cy.get(stra.policy_point).click().type(Cypress.env("Create_policy").point)
     cy.get(stra.policy_save).click()
-    cy.visit("https://stcchildbudget.infodev.com.np/popups")
-    cy.get(pop.create_popup).click()
-    cy.get(pop.name_popup).click().type("Helen Keller")
-    cy.get(pop.file_upload).click().type("C:\Users\User\Downloads\pdf-test (1) (5).pdf")
-    cy.get(pop.submit_pop).click()
+    cy.wait(1000)
+//     cy.visit("https://stcchildbudget.infodev.com.np/popups")
+//     cy.xpath(pop.create_popup).click()
+//     cy.wait(1000)
+//     cy.get(pop.name_popup).click().type("Lui Piu")
+//     cy.get(pop.file_upload).scrollIntoView().click().selectFile('cypress/fixtures/test.pdf',{force:true})
+//     cy.get(pop.submit_pop).should('be.visible').click({force: true}).then(() => {
+//         cy.wait(2000) 
+// })
+//     cy.wait(5000)
+//     function findAnddown(){
+//         cy.get('tr',{timeout:1000}).then(($tr)=>{
+//             const textToFind=Cypress.env('pop_name')
+//             const $row_finder=$tr.filter(`:contains("${textToFind}")`)
+//             if ($row_finder.length>0){
+//                 cy.log('Row finder is ',$row_finder)
+//                 cy.wrap($row_finder).within(()=>{
+//                     cy.get(pop.download).click()
+                    
+                    
+
+//                 })
+                
+//             }
+//             else{
+//                 cy.xpath(pop.move_button).click()
+//                 cy.wait(1000)
+//                 findAnddown()
+//             }
+//         })
+//      }
+//     findAnddown()
+//     cy.get(pop.three_dot).click({force:true})
+//     cy.xpath(pop.edit_xpath).click()
+//     cy.get(pop.name_popup).click().clear().type("Sunnny")
+//     cy.xpath(pop.update_xpath).click()
+//     cy.xpath(pop.delete_xpath).click()
+       cy.get('@token').then((token)=>{
+            cy.popup(token)
+
+        })
+
+
+
+
+
+})
+})
+
+
+
+
+
     
 
 
@@ -292,8 +340,7 @@ describe('Login process',() =>{
 
 
 
-})
-})
+
 
 
 

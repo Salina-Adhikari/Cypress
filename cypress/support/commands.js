@@ -82,66 +82,33 @@ Cypress.Commands.add('assignrole',(roles,user_id,year_id,token) =>{
     })
 
 })
-Cypress.Commands.add('institution',(token)=>{
-    cy.request({
-        method:'GET',
-        url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/institutions/list?page=1&per_page=10&search=Est+sed+consequuntur&sort_by=name&sort_order=asc&year_id=1",
-        headers:{
-            'Authorization': `Bearer ${token}`, 
-            'Accept': 'application/json'
+Cypress.Commands.add('popup',(token)=>{
+    cy.fixture('test.pdf','binary').then((file)=>{
+        const formData=new FormData()
+        formData.append('name','henry')
+        formData.append('order',0)
+        formData.append('status','inactive')
+        formData.append('assets',
+            Cypress.Blob.binaryStringToBlob(file),'test.pdf'
+        )
+        cy.request({
+            method:'POST',
+            url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/popups",
+            body:formData,
+             headers: {
+                'Authorization': `Bearer ${token}`
+    }
 
-        }
-    })
-    .then((response)=>{
-        const institutions=response.body.data
-        const index=2
-        const inst_id=institutions[index].id
-        cy.wrap(inst_id).as('type_id')
-        cy.log('Institution ID:', inst_id)
-    })
-})
-    
-//     cypress.request({
-//         method:'POST',
-//         url:'https://stcchildbudget.infodev.com.np/public-api/api/v1/institutions',
-//         headers:{
-//             'Content-Type':'application/json',
-//             'Authorization': `Bearer ${token}`, 
-//             'Accept': 'application/json'
-
-//         },
-//         body:{
-//             description:description,
-//             name:name,
-//             status:status,
-//             year_id:year_id,
-//             institution_type_id:institution_type_id,
-
-//         }
-
-//     })
-
-// })
-Cypress.Commands.add('Popups',(token,name,file_path) =>{
-    cy.request({
-        method:'POST',
-        url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/popups",
-        headers:{
-            'Authorization': `Bearer ${token}`, 
-            'Accept': 'application/json'
-
-        },
-        body:{
-            name:name,
-            file
-
-        }
-
-
-    })
+        }).then((response)=>{
+            cy.log('Response:',response.body)
+        })
         
-    
+    })
 })
+
+
+ 
+
 
 
 
