@@ -82,29 +82,29 @@ Cypress.Commands.add('assignrole',(roles,user_id,year_id,token) =>{
     })
 
 })
-Cypress.Commands.add('popup',(token)=>{
-    cy.fixture('test.pdf','binary').then((file)=>{
-        const formData=new FormData()
-        formData.append('name','henry')
-        formData.append('order',0)
-        formData.append('status','inactive')
-        formData.append('assets',
-            Cypress.Blob.binaryStringToBlob(file),'test.pdf'
-        )
-        cy.request({
-            method:'POST',
-            url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/popups",
-            body:formData,
-             headers: {
-                'Authorization': `Bearer ${token}`
-    }
+// Cypress.Commands.add('popup',(token)=>{
+//     cy.fixture('test.pdf','binary').then((file)=>{
+//         const formData=new FormData()
+//         formData.append('name','henry')
+//         formData.append('order',0)
+//         formData.append('status','inactive')
+//         formData.append('assets',
+//             Cypress.Blob.binaryStringToBlob(file),'test.pdf'
+//         )
+//         cy.request({
+//             method:'POST',
+//             url:"https://stcchildbudget.infodev.com.np/public-api/api/v1/popups",
+//             body:formData,
+//              headers: {
+//                 'Authorization': `Bearer ${token}`
+//     }
 
-        }).then((response)=>{
-            cy.log('Response:',response.body)
-        })
+//         }).then((response)=>{
+//             cy.log('Response:',response.body)
+//         })
         
-    })
-})
+//     })
+// })
 
 
  
