@@ -2,7 +2,7 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
-    baseUrl: "https://stcchildbudget.infodev.com.np",
+    baseUrl: "https://example.com",
   
     experimentalStudio: true,
     setupNodeEvents(on, config) {
