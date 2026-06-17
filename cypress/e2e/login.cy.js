@@ -38,7 +38,7 @@ Cypress.Commands.add('logininfo',(email,password) =>{
             setCookieHeader.forEach(cookie => {
                 if (cookie.includes('laravel_session')) {
                     const cookieValue = cookie.split(';')[0].split('=')[1]
-                    cy.setCookie('laravel_session', cookieValue,{domain:'stcchildbudget.infodev.com.np'}) 
+                    cy.setCookie('laravel_session', cookieValue,{domain:'https://example.com'}) 
                     cy.log('Cookie Value:'+cookieValue) 
             
                 } 
