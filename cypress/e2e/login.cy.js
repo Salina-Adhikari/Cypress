@@ -163,7 +163,7 @@ describe('Login process',() =>{
 // cy.get(inst.edit_update).click()//this is for the edit of the form
 
 //Institution Users
-//    cy.visit("https://stcchildbudget.infodev.com.np/institution-management/institution-users")
+//    cy.visit("/institution-management/institution-users")
 // cy.contains('tr',Cypress.env('user_assign')).within(()=>{
 //     cy.get(inst.assign_inst).click()
 //     cy.xpath(inst.assign_confirm_xpath).click()
@@ -202,7 +202,7 @@ describe('Login process',() =>{
     // cy.xpath(inst.save_xpath).click()
     // cy.wait(1000)
 // Create Investment
-    // cy.visit("https://stcchildbudget.infodev.com.np/investments")
+    // cy.visit("/investments")
     // cy.wait(1000)
     // cy.xpath(inst.invest_create).click()
     // cy.get(inst.search_inst).click().type(Cypress.env('search_inst'))
@@ -256,7 +256,7 @@ describe('Login process',() =>{
     // cy.get(stra.policy_point).click().type(Cypress.env("Create_policy").point)
     // cy.get(stra.policy_save).click()
     
-    cy.visit("https://stcchildbudget.infodev.com.np/popups")
+    cy.visit("/popups")
     cy.xpath(pop.create_popup).click()
     cy.wait(1000)
     cy.get(pop.name_popup).click().type(Cypress.env('pop_name'))
@@ -296,7 +296,7 @@ describe('Login process',() =>{
     //    cy.wait(2000)
 
 //Creating setup Secotrs
-   cy.visit("https://stcchildbudget.infodev.com.np/setup/sectors")
+   cy.visit("/setup/sectors")
    cy.xpath(pop.create_xpath).click()
    cy.xpath(pop.sector_submit).click()
 
